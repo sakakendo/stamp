@@ -8,6 +8,7 @@ from linebot.exceptions import (
 from linebot.models import (
         MessageEvent,TextMessage,TextSendMessage,
     )
+from icecream import ic
 
 # env
 #print(dotenv.find_dotenv())
@@ -59,6 +60,13 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=event.message.text))
     print("handle_message ret",ret)
+
+@handler.add(BeaconEvent)
+def handler_beacon(event):
+    print(event)
+    if event.beacon.type is "":
+        pass
+
 
 if __name__ =="__main__":
     app.run(host="0.0.0.0",port=8080,debug=True)
