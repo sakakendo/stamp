@@ -2,8 +2,7 @@ import dotenv
 import linebot
 import os
 import requests
-from flask import Flask,request,session,abort
-#from flask.ext.session import Session
+from flask import Flask,request,session,abort,render_template
 from linebot.exceptions import (
         InvalidSignatureError
     )
@@ -37,12 +36,16 @@ else:
     print("line login channel_id and channel_secret is loaded successfully")
 LINE_OAUTH_STATE="QWERTY"
 
-app=Flask(__name__)
+app=Flask(__name__,static_url_path="/line/static")
 app.secret_key="secret_key"
 
 linebot_api=linebot.LineBotApi(CHANNEL_ACCESS_TOKEN)
 handler=linebot.WebhookHandler(CHANNEL_SECRET)
 access_tokens={}
+
+@app.route("/line/stamp")
+def stamp():
+    return render_template("vrview.html")
 
 def get_user_state():
     displayName=session.get('user')
@@ -61,10 +64,11 @@ def index():
             {0}
             <p>
                 this is a stamp rally with line api and google 360 media.
-                <a src="/"> top page</a>
-                <a src="#"> curreent page</a>
-                <a src="/line/login">start page</a>
-                <a src="/line/logout">logout</a>
+                <a href="/"> top page</a>
+                <a href="#"> curreent page</a>
+                <a href="/line/login">start page</a>
+                <a href="/line/logout">logout</a>
+                <a href="/line/stamp">stamp</a>
             </p>
             <p>developer:<a href="https://github.com/sakakendo0321/>sakakendo0321</a></p>
         </body>
