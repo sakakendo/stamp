@@ -9,6 +9,9 @@ verify_ssl = true
 line-bot-sdk = "*"
 Flask = "*"
 python-dotenv = "*"
+icecream = "*"
+requests = "*"
+flask-session = "*"
 
 [requires]
 python_version = "3.6"
