@@ -12,6 +12,7 @@ python-dotenv = "*"
 icecream = "*"
 requests = "*"
 flask-session = "*"
+contentful = "*"
 
 [requires]
 python_version = "3.6"
